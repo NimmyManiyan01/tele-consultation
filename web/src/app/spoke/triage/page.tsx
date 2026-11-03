@@ -29,8 +29,25 @@ import { SpokePatientCase } from "@/types";
 import { kgsApi } from "@/lib/api-client";
 
 export default function SpokeTriagePage() {
+  const defaultCase: SpokePatientCase = {
+    id: "spoke-new",
+    patientName: "No Active Case",
+    age: 0,
+    gender: "OTHER",
+    villageName: "Primary Spoke Center",
+    choName: "CHO On Duty",
+    bp: "--/--",
+    pulse: 0,
+    spO2: 0,
+    bloodSugar: 0,
+    chiefComplaint: "No pending triage cases in the spoke queue.",
+    triagePriority: "ROUTINE",
+    assignedHubDoctor: "Assigned Hub Clinician",
+    status: "COMPLETED",
+    registeredAt: "--:--"
+  };
   const [cases, setCases] = useState<SpokePatientCase[]>(MOCK_SPOKE_CASES);
-  const [selectedCase, setSelectedCase] = useState<SpokePatientCase>(MOCK_SPOKE_CASES[0]);
+  const [selectedCase, setSelectedCase] = useState<SpokePatientCase>(MOCK_SPOKE_CASES[0] || defaultCase);
   const [isBluetoothSyncing, setIsBluetoothSyncing] = useState<boolean>(false);
   const [syncNotice, setSyncNotice] = useState<string | null>(null);
   const [showReferralVoucher, setShowReferralVoucher] = useState<boolean>(false);

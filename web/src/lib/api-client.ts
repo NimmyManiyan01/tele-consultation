@@ -207,7 +207,7 @@ export const kgsApi = {
           nextAvailableSlot: "Today, Available",
         };
       } catch (e) {
-        return MOCK_CLINICIANS.find(doc => doc.id === doctorId) || MOCK_CLINICIANS[0];
+        return MOCK_CLINICIANS.find(doc => doc.id === doctorId) || null;
       }
     },
   },
@@ -314,7 +314,7 @@ export const kgsApi = {
       try {
         return await apiFetch<any>(`/prescriptions/${prescriptionId}`);
       } catch (e) {
-        return MOCK_PRESCRIPTIONS[0];
+        return MOCK_PRESCRIPTIONS[0] || null;
       }
     },
   },

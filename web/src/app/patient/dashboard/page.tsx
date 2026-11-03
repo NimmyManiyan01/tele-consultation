@@ -21,9 +21,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MOCK_CLINICIANS, MOCK_DEPENDENTS, MOCK_PRESCRIPTIONS } from "@/data/mock-store";
 
 export default function PatientDashboardPage() {
-  const doctor = MOCK_CLINICIANS[0];
+  const doctor = MOCK_CLINICIANS[0] || null;
   const dependents = MOCK_DEPENDENTS;
-  const [selectedDependent, setSelectedDependent] = useState(dependents[0]);
+  const defaultProfile = {
+    id: "self",
+    fullName: "Patient",
+    relationship: "SELF" as const,
+    gender: "OTHER" as const,
+    dateOfBirth: "",
+    bloodGroup: "",
+    knownAllergies: [],
+    chronicConditions: []
+  };
+  const [selectedDependent, setSelectedDependent] = useState(dependents[0] || defaultProfile);
 
   return (
     <div className="bg-slate-50 min-h-screen py-8">
@@ -32,7 +42,7 @@ export default function PatientDashboardPage() {
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-2xl bg-brand-blue-600 text-white font-bold text-2xl flex items-center justify-center shrink-0 shadow">
-              {selectedDependent.fullName[0]}
+              {selectedDependent.fullName[0] || "P"}
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -50,60 +60,73 @@ export default function PatientDashboardPage() {
           </div>
 
           {/* Dependent Switcher */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-500 font-medium">Profile:</span>
-            <select
-              value={selectedDependent.id}
-              onChange={(e) => {
-                const found = dependents.find(d => d.id === e.target.value);
-                if (found) setSelectedDependent(found);
-              }}
-              className="text-xs font-semibold p-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-blue-500 cursor-pointer"
-            >
-              {dependents.map((dep) => (
-                <option key={dep.id} value={dep.id}>
-                  {dep.fullName} ({dep.relationship})
-                </option>
-              ))}
-            </select>
-          </div>
+          {dependents.length > 0 && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-slate-500 font-medium">Profile:</span>
+              <select
+                value={selectedDependent.id}
+                onChange={(e) => {
+                  const found = dependents.find(d => d.id === e.target.value);
+                  if (found) setSelectedDependent(found);
+                }}
+                className="text-xs font-semibold p-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-blue-500 cursor-pointer"
+              >
+                {dependents.map((dep) => (
+                  <option key={dep.id} value={dep.id}>
+                    {dep.fullName} ({dep.relationship})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
 
         {/* Next Upcoming Appointment Action Card */}
-        <div className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-brand-green-400 animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-green-300">
-                Next Confirmed Consultation
-              </span>
+        {doctor ? (
+          <div className="bg-gradient-to-r from-brand-blue-700 to-brand-blue-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-brand-green-400 animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider text-brand-green-300">
+                  Next Confirmed Consultation
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold">
+                Teleconsultation with {doctor.fullName}
+              </h2>
+              <p className="text-xs text-brand-blue-100 flex items-center gap-3">
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-3.5 w-3.5" />
+                  Today, 4:30 PM (20 Mins)
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <Video className="h-3.5 w-3.5" />
+                  HD Video Room
+                </span>
+              </p>
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold">
-              Teleconsultation with {doctor.fullName}
-            </h2>
-            <p className="text-xs text-brand-blue-100 flex items-center gap-3">
-              <span className="flex items-center gap-1">
-                <Calendar className="h-3.5 w-3.5" />
-                Today, 4:30 PM (20 Mins)
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <Video className="h-3.5 w-3.5" />
-                HD Video Room
-              </span>
-            </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-            <Link href="/room/appt-5412">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto font-bold gap-2 shadow-lg">
-                <Video className="h-5 w-5" />
-                <span>Join Pre-Call Room</span>
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <Link href="/room/appt-5412">
+                <Button size="lg" variant="secondary" className="w-full sm:w-auto font-bold gap-2 shadow-lg">
+                  <Video className="h-5 w-5" />
+                  <span>Join Pre-Call Room</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 shadow-sm">
+            <Calendar className="h-10 w-10 text-slate-300 mx-auto mb-2" />
+            <h3 className="text-sm font-bold text-slate-800">No Upcoming Appointments</h3>
+            <p className="text-xs text-slate-500 mt-1">You have no pending or confirmed consultations at this time.</p>
+            <Link href="/doctors" className="mt-3 inline-block">
+              <Button size="sm" className="text-xs">Book a Consultation</Button>
             </Link>
           </div>
-        </div>
+        )}
 
         {/* 2-Column: Recent Prescriptions & Family Accounts */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -120,23 +143,27 @@ export default function PatientDashboardPage() {
             </div>
 
             <div className="space-y-3">
-              {MOCK_PRESCRIPTIONS.map((rx) => (
-                <div key={rx.id} className="p-3.5 rounded-lg border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold text-xs text-slate-900">{rx.doctorName}</h4>
-                    <p className="text-[11px] text-slate-500">{rx.encounterDate} • {rx.clinicName}</p>
-                    <p className="text-[10px] text-brand-blue-700 font-medium mt-0.5">
-                      {rx.medicines.map(m => m.drugName).join(", ")}
-                    </p>
+              {MOCK_PRESCRIPTIONS.length > 0 ? (
+                MOCK_PRESCRIPTIONS.map((rx) => (
+                  <div key={rx.id} className="p-3.5 rounded-lg border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex items-center justify-between">
+                    <div>
+                      <h4 className="font-bold text-xs text-slate-900">{rx.doctorName}</h4>
+                      <p className="text-[11px] text-slate-500">{rx.encounterDate} • {rx.clinicName}</p>
+                      <p className="text-[10px] text-brand-blue-700 font-medium mt-0.5">
+                        {rx.medicines.map(m => m.drugName).join(", ")}
+                      </p>
+                    </div>
+                    <Link href={`/prescription/${rx.id}`}>
+                      <Button size="sm" variant="outline" className="text-xs gap-1">
+                        <span>View</span>
+                        <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </Link>
                   </div>
-                  <Link href={`/prescription/${rx.id}`}>
-                    <Button size="sm" variant="outline" className="text-xs gap-1">
-                      <span>View</span>
-                      <ChevronRight className="h-3 w-3" />
-                    </Button>
-                  </Link>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-xs text-slate-400 text-center py-4">No recent e-prescriptions issued.</p>
+              )}
             </div>
           </div>
 

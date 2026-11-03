@@ -33,7 +33,7 @@ export default function VideoTeleconsultationRoomPage() {
   const params = useParams();
   const router = useRouter();
   const roomId = (params?.id as string) || "appt-5412";
-  const doctor = MOCK_CLINICIANS[0];
+  const doctor = MOCK_CLINICIANS[0] || null;
 
   // States
   const [deviceCheckPassed, setDeviceCheckPassed] = useState(false);

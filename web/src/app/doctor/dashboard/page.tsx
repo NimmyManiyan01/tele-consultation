@@ -34,55 +34,17 @@ interface QueuePatient {
   hasRedFlags: boolean;
 }
 
-const MOCK_QUEUE: QueuePatient[] = [
-  {
-    token: "T-01",
-    id: "appt-5412",
-    name: "Rohan Verma",
-    ageGender: "36 / Male",
-    type: "VIDEO",
-    timeSlot: "4:30 PM (Now)",
-    status: "WAITING_IN_ROOM",
-    chiefComplaint: "Mild exertional breathlessness, morning BP 145/92 mmHg",
-    hasRedFlags: false,
-  },
-  {
-    token: "T-02",
-    id: "appt-5413",
-    name: "Aarav Verma (Child)",
-    ageGender: "6 / Male",
-    type: "VIDEO",
-    timeSlot: "5:00 PM",
-    status: "READY",
-    chiefComplaint: "Dry nocturnal cough, low-grade fever for 2 days",
-    hasRedFlags: false,
-  },
-  {
-    token: "T-03",
-    id: "appt-5414",
-    name: "Sushila Devi",
-    ageGender: "68 / Female",
-    type: "IN_CLINIC",
-    timeSlot: "5:30 PM",
-    status: "READY",
-    chiefComplaint: "Routine hypertension and diabetic HbA1c review",
-    hasRedFlags: false,
-  },
-  {
-    token: "T-04",
-    id: "appt-5410",
-    name: "Vikram Singhania",
-    ageGender: "45 / Male",
-    type: "VIDEO",
-    timeSlot: "3:30 PM",
-    status: "COMPLETED",
-    chiefComplaint: "Post-op cardiology routine follow-up",
-    hasRedFlags: false,
-  }
-];
+const MOCK_QUEUE: QueuePatient[] = [];
 
 export default function DoctorDashboardPage() {
-  const doctor = MOCK_CLINICIANS[0];
+  const doctor = MOCK_CLINICIANS[0] || {
+    id: "doc-01",
+    fullName: "Dr. Clinician",
+    primarySpecialty: "Telemedicine Specialist",
+    councilRegistrationNumber: "REG-00000",
+    experienceYears: 10,
+    videoFee: 500
+  };
   const [isOnline, setIsOnline] = useState(true);
   const [queue, setQueue] = useState<QueuePatient[]>(MOCK_QUEUE);
 
@@ -224,7 +186,16 @@ export default function DoctorDashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {queue.map((patient) => {
+                  {queue.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="py-12 text-center text-slate-400">
+                        <Users className="h-8 w-8 mx-auto mb-2 text-slate-300" />
+                        <p className="text-sm font-semibold text-slate-600">No Patients in Waiting Room</p>
+                        <p className="text-xs text-slate-400 mt-0.5">There are no teleconsultation or clinic check-ins queued for today.</p>
+                      </td>
+                    </tr>
+                  ) : (
+                    queue.map((patient) => {
                     const isWaitingNow = patient.status === "WAITING_IN_ROOM";
                     return (
                       <tr 
@@ -299,7 +270,7 @@ export default function DoctorDashboardPage() {
                         </td>
                       </tr>
                     );
-                  })}
+                  }))}
                 </tbody>
               </table>
             </div>

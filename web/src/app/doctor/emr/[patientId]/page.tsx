@@ -28,8 +28,22 @@ import { PrescribedMedicine } from "@/types";
 export default function ClinicalEMRChartingPage() {
   const params = useParams();
   const router = useRouter();
-  const patient = MOCK_DEPENDENTS[0];
-  const doctor = MOCK_CLINICIANS[0];
+  const patient = MOCK_DEPENDENTS[0] || {
+    id: "p-01",
+    fullName: "Patient Record",
+    gender: "MALE" as const,
+    dateOfBirth: "1988-06-14",
+    bloodGroup: "O+",
+    knownAllergies: [],
+    chronicConditions: [],
+    relationship: "SELF" as const
+  };
+  const doctor = MOCK_CLINICIANS[0] || {
+    id: "doc-01",
+    fullName: "Attending Clinician",
+    councilRegistrationNumber: "REG-00000",
+    primarySpecialty: "General Physician"
+  };
 
   // SOAP Documentation State
   const [subjective, setSubjective] = useState("Patient reports exertional breathlessness over past 10 days, accompanied by morning headaches. Reports home BP recordings hovering around 145/92 mmHg. No chest pain, syncope, or orthopnea.");

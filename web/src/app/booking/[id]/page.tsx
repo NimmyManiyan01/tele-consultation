@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/navigation";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { 
   ShieldCheck, 
@@ -15,7 +15,8 @@ import {
   ArrowLeft,
   ChevronRight,
   BellRing,
-  Lock
+  Lock,
+  Stethoscope
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,9 +29,9 @@ export default function AppointmentBookingPage() {
   const params = useParams();
   const router = useRouter();
   const doctorId = (params?.id as string) || "doc-01";
-  const doctor = MOCK_CLINICIANS.find(d => d.id === doctorId) || MOCK_CLINICIANS[0];
+  const doctor = MOCK_CLINICIANS.find(d => d.id === doctorId);
 
-  const [selectedDependentId, setSelectedDependentId] = useState(MOCK_DEPENDENTS[0].id);
+  const [selectedDependentId, setSelectedDependentId] = useState(MOCK_DEPENDENTS[0]?.id || "self");
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>("slot-01");
   const [waitlistOptIn, setWaitlistOptIn] = useState(true);
@@ -47,6 +48,22 @@ export default function AppointmentBookingPage() {
       iso: d.toISOString().split("T")[0]
     };
   });
+
+  if (!doctor) {
+    return (
+      <div className="bg-slate-50 min-h-screen py-16 flex items-center justify-center">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center max-w-md mx-auto shadow-sm">
+          <Stethoscope className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+          <h2 className="text-lg font-bold text-slate-900 mb-1">Clinician Not Available</h2>
+          <p className="text-xs text-slate-500 mb-4">No active scheduling profile exists for this clinician ID.</p>
+          <Link href="/doctors" className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-blue-700 hover:underline">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Browse Doctor Directory</span>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   const slots = MOCK_SLOTS;
   const morningSlots = slots.filter(s => s.period === "MORNING");

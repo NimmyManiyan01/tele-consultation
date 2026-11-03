@@ -25,7 +25,13 @@ import { formatCurrency } from "@/lib/utils";
 
 export default function InstantConsultationPage() {
   const router = useRouter();
-  const instantDoctor = MOCK_CLINICIANS[1]; // Dr. Rajesh Menon
+  const instantDoctor = MOCK_CLINICIANS[1] || MOCK_CLINICIANS[0] || {
+    id: "doc-duty",
+    fullName: "On-Duty Medical Officer",
+    primarySpecialty: "Emergency Tele-Triage",
+    councilRegistrationNumber: "MCI-EMERG-POOL",
+    videoFee: 499
+  };
 
   const [step, setStep] = useState<"INTAKE" | "MATCHING" | "MATCHED">("INTAKE");
   const [complaint, setComplaint] = useState("");

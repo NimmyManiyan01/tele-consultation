@@ -14,7 +14,8 @@ import {
   ArrowLeft, 
   Pill, 
   Calendar,
-  ExternalLink
+  ExternalLink,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,11 +25,27 @@ export default function DigitalPrescriptionViewerPage() {
   const params = useParams();
   const router = useRouter();
   const prescriptionId = (params?.id as string) || "rx-98421";
-  const prescription = MOCK_PRESCRIPTIONS[0];
+  const prescription = MOCK_PRESCRIPTIONS.find(p => p.id === prescriptionId) || MOCK_PRESCRIPTIONS[0];
 
   const handlePrint = () => {
     window.print();
   };
+
+  if (!prescription) {
+    return (
+      <div className="bg-slate-50 min-h-screen py-16 flex items-center justify-center">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center max-w-md mx-auto shadow-sm">
+          <FileText className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+          <h2 className="text-lg font-bold text-slate-900 mb-1">Prescription Not Found</h2>
+          <p className="text-xs text-slate-500 mb-4">No verified clinical prescription exists for record &ldquo;{prescriptionId}&rdquo;.</p>
+          <Link href="/patient/dashboard" className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-blue-700 hover:underline">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Return to Dashboard</span>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-100 min-h-screen py-8 print:bg-white print:py-0">

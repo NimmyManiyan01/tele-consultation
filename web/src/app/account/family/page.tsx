@@ -95,6 +95,17 @@ export default function FamilyAccountManagerPage() {
 
         {/* Dependents Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {dependents.length === 0 && (
+            <div className="col-span-full bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 shadow-sm">
+              <Users className="h-10 w-10 text-slate-300 mx-auto mb-2" />
+              <h3 className="text-sm font-bold text-slate-800">No Family Members Registered</h3>
+              <p className="text-xs text-slate-500 mt-1">Add your dependents or family members to manage their consultations together.</p>
+              <Button size="sm" onClick={() => setIsModalOpen(true)} className="mt-3 text-xs gap-1.5">
+                <UserPlus className="h-3.5 w-3.5" />
+                <span>Add First Family Member</span>
+              </Button>
+            </div>
+          )}
           {dependents.map((dep) => {
             const isSelf = dep.relationship === "SELF";
             return (

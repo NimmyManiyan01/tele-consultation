@@ -28,8 +28,18 @@ export default function BookingSuccessPage() {
   const params = useParams();
   const router = useRouter();
   const appointmentId = (params?.id as string) || "appt-5412";
-  const doctor = MOCK_CLINICIANS[0];
-  const patient = MOCK_DEPENDENTS[0];
+  const doctor = MOCK_CLINICIANS[0] || {
+    id: "doc-01",
+    fullName: "Attending Clinician",
+    primarySpecialty: "Telehealth Specialist",
+    councilRegistrationNumber: "REG-00000",
+    videoFee: 500
+  };
+  const patient = MOCK_DEPENDENTS[0] || {
+    id: "self",
+    fullName: "Registered Patient",
+    relationship: "SELF" as const
+  };
 
   const handleDownloadCalendar = () => {
     // Generate .ics calendar payload
