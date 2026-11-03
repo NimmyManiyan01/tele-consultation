@@ -1,0 +1,50 @@
+feature,area,priority,original,clone,notes
+Patient phone OTP login,onboarding,must,yes,yes,Implemented in auth_service.py with E.164 phone normalization and OTP verification on /auth/national
+ABHA ID creation and linking (ABDM M1),onboarding,must,yes,yes,Implemented on /auth/national with Aadhaar OTP verification and HIP linking
+Patient family member profile management,onboarding,must,yes,yes,Implemented on /account/family with child and parent profiles
+Doctor search by specialty symptom and city,discovery,must,yes,yes,Implemented on /doctors with multi-facet filters
+Doctor profile with qualifications fees and timings,discovery,must,yes,yes,Implemented on /doctor/[id] with council verification badge
+Patient reviews and clinic ratings,discovery,should,yes,yes,Implemented on /doctor/[id] review tab and breakdown
+In-clinic doctor appointment slot booking,scheduling,must,yes,yes,Implemented on /booking/[id] with date carousel & slot chips
+Instant teleconsultation matching (< 15 mins),telehealth,must,yes,yes,Implemented on /consult/instant with acute pool matching and 15m SLA
+Scheduled video consultation,telehealth,must,yes,yes,Implemented on /room/[id] with device pre-flight diagnostics
+WebRTC peer-to-peer / SFU video streaming,telehealth,must,yes,yes,Implemented with LiveKit SFU layout and in-call controls
+In-consultation document and image sharing,telehealth,must,yes,yes,Implemented via slide-out in-call clinical chat drawer
+Digital e-Prescription generator,clinical,must,yes,yes,Implemented on /doctor/emr/[id] and /prescription/[id]
+ICD-10 and SNOMED CT clinical coding,clinical,should,yes,yes,Implemented in EMR SOAP assessment with auto-suggest
+Digital health vault / longitudinal EHR,records,must,yes,yes,Implemented on /vault with category filtering upload and preview
+Pharmacy medicine catalog and cart,pharmacy,must,yes,yes,Implemented on /pharmacy with category filtering and interactive cart
+Prescription upload with pharmacist verification,pharmacy,must,yes,yes,Implemented on /pharmacy/upload with OCR parsing and pharmacist SLA gate
+Automated 2-hour hyperlocal medicine delivery,pharmacy,could,yes,skip,Requires physical retail pharmacy store network
+Diagnostic lab test catalog and package booking,diagnostics,must,yes,yes,Implemented on /diagnostics with comprehensive health shields
+Home sample collection slot scheduling,diagnostics,must,yes,yes,Implemented on /diagnostics with morning fasting slots and cold-chain guarantee
+Automated digital lab report delivery,diagnostics,must,yes,yes,Direct digital report integration from NABL lab partners to /vault
+Doctor mobile app (Practo Pro / Apollo Doctor),doctor portal,must,yes,yes,Implemented responsive web portal on /doctor/dashboard
+Clinic practice management (Practo Ray),clinic management,should,yes,yes,Implemented on /clinic/reception with OPD live queue and walk-in entry
+Clinic itemized billing and GST invoicing,billing,should,yes,no,Receipt generation and payment tracking
+Assisted telemedicine hub-and-spoke model,public health,must,yes,yes,Implemented on /spoke/triage for rural CHOs to apex hospital hubs
+Frontline health worker vitals capture (BP SpO2 Sugar),public health,must,yes,yes,Implemented on /clinic/reception modal with normal range guards
+Doctor department queue and triage routing,public health,must,yes,yes,Implemented on /clinic/reception and /consultations/queue
+Admin doctor rostering and shift allocation,admin,must,yes,no,State and specialty OPD schedule management
+ABDM health information exchange and consent manager,compliance,must,yes,yes,Implemented in abdm_service.py with M1/M2/M3 consent exchange on /vault
+Paid healthcare subscription (Apollo Circle / Practo Plus),monetization,could,yes,no,Cashback and priority slot subscription
+AI Clinical Intelligence Engine symptom triage,ai triage,should,yes,no,Apollo CIE / MedLM symptom checker
+Elective surgery care coordination,care operations,could,yes,skip,Practo Care model requires dedicated hospital tie-ups
+Multilingual interface (Hindi English and regional),accessibility,must,yes,no,Crucial for inclusive telehealth access
+SMS and WhatsApp automated notifications,notifications,must,yes,yes,Implemented in notification_service.py with multi-channel dispatch
+National teleconsultation analytics dashboard,analytics,should,yes,yes,Implemented on /admin/analytics with SLO cards and residency monitor
+Real-time health insurance eligibility check (EDI 270/271),insurance,must,yes,no,Teladoc/Amwell payer eligibility and copay determination
+SMART on FHIR embedded launch inside hospital EHR,interoperability,should,yes,yes,Implemented on /ehr/embedded with Epic/Cerner simulated container and CDS Hooks
+Multi-party video consultation with medical interpreter,telehealth,must,yes,yes,Implemented on /doctor/room/multi/[id] with 4-way WebRTC audio/video bridge
+National e-prescribing network switch (Surescripts/EPS/e-Rezept),clinical,must,yes,no,"Direct electronic pharmacy transmission in US, UK and Germany"
+Dynamic cancellation slot pull-forward (Avancer RDV),scheduling,should,yes,yes,Implemented on /booking/[id] with waitlist pull-forward toggle
+Asynchronous store-and-forward pre-consult photo triage,clinical,should,yes,yes,Implemented on /intake/[id] with EXIF metadata scrubbing and symptom rating
+Multi-jurisdiction clinician licensure tracking,compliance,must,yes,no,Teladoc/Amwell 50-state and national medical board routing
+National Health ID SSO authentication (NHS login/Ameli),onboarding,should,yes,yes,Implemented on /auth/national supporting ABHA M1 Aadhaar OTP federation
+Clinical practice macros and order set templates,doctor portal,must,yes,yes,Implemented 1-click clinical templates in EMR SOAP editor
+Automated provider payout splits and TDS/GST tax accounting,billing,must,yes,yes,Implemented on /doctor/finance/payouts with Sec 194J 10% TDS and batch ledger
+Statutory emergency clinical triage hard abort trigger,clinical safety,must,yes,yes,EmergencyTakeoverModal intercepts acute keyword red-flags
+MoHFW Schedule X narcotics restriction rule engine,clinical safety,must,yes,yes,Implemented ScheduleXModal intercept blocking banned drugs
+Sovereign health data localization and DPDP/GDPR consent manager,compliance,must,yes,yes,Implemented on /privacy and /auth/national with Central India Azure residency
+Standardized diagnostic pathology/radiology requisition slips,clinical,must,yes,yes,Implemented on /spoke/triage and /diagnostics with lab vouchers
+Chronic disease remote monitoring device integration (RPM),chronic care,could,yes,yes,Implemented on /spoke/triage with Bluetooth sensor sync simulation

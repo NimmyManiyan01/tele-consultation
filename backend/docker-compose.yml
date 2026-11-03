@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kaizentrix-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=development
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/kaizentrix_telehealth
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=kgs_production_docker_secret_3910f82c4e7
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - kgs-network
+
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: kaizentrix-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: kaizentrix_telehealth
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d kaizentrix_telehealth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kgs-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: kaizentrix-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kgs-network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  kgs-network:
+    driver: bridge
+

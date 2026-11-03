@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;           /* #F8FAFC - Clinical Anti-Glare Canvas */
+    --foreground: 222 47% 11%;           /* #0F172A - Deep Charcoal High-Contrast Body */
+
+    --card: 0 0% 100%;                   /* #FFFFFF - Pure Sterile Card Canvas */
+    --card-foreground: 222 47% 11%;      /* #0F172A */
+
+    --popover: 0 0% 100%;                /* #FFFFFF - Dropdowns, Tooltips, Modals */
+    --popover-foreground: 222 47% 11%;   /* #0F172A */
+
+    /* Brand Primary Anchor: Derived from KGS Monogram Body (#1158B0) */
+    --primary: 213 82% 38%;              /* #1158B0 - Royal Cobalt Brand Primary */
+    --primary-foreground: 0 0% 100%;     /* #FFFFFF - 6.89:1 WCAG AA */
+
+    /* Brand Secondary / Vitality Anchor: Derived from Kaizen Arrow (#8AC048) */
+    --secondary: 84 56% 89%;             /* #E7F3D5 - Vitality Tint */
+    --secondary-foreground: 92 60% 16%;  /* #284311 - Deep Clinical Forest (9.56:1 AAA) */
+
+    --muted: 210 40% 96%;                /* #F1F5F9 - Disabled, subtle backgrounds */
+    --muted-foreground: 215 16% 47%;     /* #64748B - Muted labels (4.76:1 AA) */
+
+    --accent: 214 95% 93%;               /* #DBEAFE - Active tab / list item hover */
+    --accent-foreground: 214 82% 31%;    /* #0E4892 - Deep Brand Blue */
+
+    /* Critical Emergency & Contraindications (#DC2626) */
+    --destructive: 0 72% 51%;            /* #DC2626 - Emergency / Delete Action */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF - 4.83:1 WCAG AA */
+
+    /* Accessible Interactive Boundaries (WCAG 2.2 SC 1.4.11 >= 3.0:1) */
+    --border: 215 16% 47%;               /* #64748B - 4.76:1 on White Canvas */
+    --input: 0 0% 100%;                  /* #FFFFFF - Input Surface */
+    --ring: 210 82% 43%;                 /* #146CC6 - Focus Ring (5.26:1) */
+
+    --radius: 0.5rem;                    /* 8px Base Card Radius */
+
+    /* Healthcare Clinical Status Extensions */
+    --clinical-success-bg: 84 56% 89%;        /* #E7F3D5 */
+    --clinical-success-fg: 92 60% 16%;        /* #284311 */
+    --clinical-success-border: 85 55% 80%;    /* #D1E8B0 */
+
+    --clinical-warning-bg: 48 96% 89%;        /* #FEF3C7 */
+    --clinical-warning-fg: 22 78% 26%;        /* #78350F */
+    --clinical-warning-border: 48 97% 77%;    /* #FDE68A */
+
+    --clinical-error-bg: 0 93% 94%;           /* #FEE2E2 */
+    --clinical-error-fg: 0 63% 31%;           /* #7F1D1D */
+    --clinical-error-border: 0 96% 89%;       /* #FECACA */
+
+    --clinical-info-bg: 204 94% 94%;          /* #E0F2FE */
+    --clinical-info-fg: 202 80% 24%;          /* #0C4A6E */
+    --clinical-info-border: 201 94% 86%;      /* #BAE6FD */
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 213 94% 68%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 92 60% 16%;
+    --secondary-foreground: 84 56% 89%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 30%;
+    --input: 217 33% 17%;
+    --ring: 213 94% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+

@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* -------------------------------------------------------------------------
+       Kaizentrix Core Surface Semantic Tokens (Light Mode - Clinical Day)
+       ------------------------------------------------------------------------- */
+    --background: 210 40% 98%;           /* #F8FAFC - Clinical Anti-Glare Canvas */
+    --foreground: 222 47% 11%;           /* #0F172A - Deep Charcoal High-Contrast Body */
+
+    --card: 0 0% 100%;                   /* #FFFFFF - Pure Sterile Card Canvas */
+    --card-foreground: 222 47% 11%;      /* #0F172A */
+
+    --popover: 0 0% 100%;                /* #FFFFFF - Dropdowns, Tooltips, Modals */
+    --popover-foreground: 222 47% 11%;   /* #0F172A */
+
+    /* Brand Primary Anchor: Derived from KGS Monogram Body (#1158B0) */
+    --primary: 213 82% 38%;              /* #1158B0 - Royal Cobalt Brand Primary */
+    --primary-foreground: 0 0% 100%;     /* #FFFFFF - 6.89:1 WCAG AA */
+
+    /* Brand Secondary / Vitality Anchor: Derived from Kaizen Arrow (#8AC048) */
+    --secondary: 84 56% 89%;             /* #E7F3D5 - Vitality Tint */
+    --secondary-foreground: 92 60% 16%;  /* #284311 - Deep Clinical Forest (9.56:1 AAA) */
+
+    --muted: 210 40% 96%;                /* #F1F5F9 - Disabled, subtle backgrounds */
+    --muted-foreground: 215 16% 47%;     /* #64748B - Muted labels (4.76:1 AA) */
+
+    --accent: 214 95% 93%;               /* #DBEAFE - Active tab / list item hover */
+    --accent-foreground: 214 82% 31%;    /* #0E4892 - Deep Brand Blue */
+
+    /* Critical Emergency & Contraindications (#DC2626) */
+    --destructive: 0 72% 51%;            /* #DC2626 - Emergency / Delete Action */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF - 4.83:1 WCAG AA */
+
+    /* Accessible Interactive Boundaries (WCAG 2.2 SC 1.4.11 >= 3.0:1) */
+    --border: 215 16% 47%;               /* #64748B - 4.76:1 on White Canvas */
+    --input: 0 0% 100%;                  /* #FFFFFF - Input Surface */
+    --ring: 210 82% 43%;                 /* #146CC6 - Focus Ring (5.26:1) */
+
+    --radius: 0.5rem;                    /* 8px Base Card Radius */
+
+    /* -------------------------------------------------------------------------
+       Healthcare-Specific Clinical Status Extensions
+       ------------------------------------------------------------------------- */
+    --clinical-success-bg: 84 56% 89%;        /* #E7F3D5 */
+    --clinical-success-fg: 92 60% 16%;        /* #284311 */
+    --clinical-success-border: 85 55% 80%;    /* #D1E8B0 */
+
+    --clinical-warning-bg: 48 96% 89%;        /* #FEF3C7 */
+    --clinical-warning-fg: 22 78% 26%;        /* #78350F */
+    --clinical-warning-border: 48 97% 77%;    /* #FDE68A */
+
+    --clinical-error-bg: 0 93% 94%;           /* #FEE2E2 */
+    --clinical-error-fg: 0 63% 31%;           /* #7F1D1D */
+    --clinical-error-border: 0 96% 89%;       /* #FECACA */
+
+    --clinical-info-bg: 204 94% 94%;          /* #E0F2FE */
+    --clinical-info-fg: 202 80% 24%;          /* #0C4A6E */
+    --clinical-info-border: 201 94% 86%;      /* #BAE6FD */
+  }
+
+  .dark {
+    /* -------------------------------------------------------------------------
+       Kaizentrix Core Surface Semantic Tokens (Dark Mode - Clinician Night)
+       ------------------------------------------------------------------------- */
+    --background: 229 84% 5%;            /* #020617 - Deepest OLED Charcoal Foundation */
+    --foreground: 210 40% 98%;           /* #F8FAFC - High-Contrast Typographic Light */
+
+    --card: 222 47% 11%;                 /* #0F172A - Elevated Dark Card Surface */
+    --card-foreground: 210 40% 98%;      /* #F8FAFC */
+
+    --popover: 222 47% 11%;              /* #0F172A */
+    --popover-foreground: 210 40% 98%;   /* #F8FAFC */
+
+    --primary: 210 82% 43%;              /* #146CC6 - High-Luminance Cobalt Primary */
+    --primary-foreground: 0 0% 100%;     /* #FFFFFF - 5.26:1 WCAG AA */
+
+    --secondary: 92 64% 9%;              /* #152408 - Deep Forest Container */
+    --secondary-foreground: 86 56% 69%;  /* #B6DC83 - Soft Recovery Green (10.53:1 AAA) */
+
+    --muted: 217 33% 17%;                /* #1E293B */
+    --muted-foreground: 215 20% 65%;     /* #94A3B8 */
+
+    --accent: 214 82% 18%;               /* #082852 */
+    --accent-foreground: 213 97% 87%;    /* #BFDBFE */
+
+    --destructive: 0 72% 51%;            /* #DC2626 */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+
+    --border: 217 33% 17%;               /* #1E293B */
+    --input: 217 33% 17%;                /* #1E293B */
+    --ring: 217 91% 60%;                 /* #3B82F6 */
+
+    /* Dark Mode Clinical Status Extensions */
+    --clinical-success-bg: 92 64% 9%;         /* #152408 */
+    --clinical-success-fg: 86 56% 69%;        /* #B6DC83 */
+    --clinical-success-border: 91 59% 24%;    /* #3C6119 */
+
+    --clinical-warning-bg: 21 92% 14%;        /* #451A03 */
+    --clinical-warning-fg: 46 97% 65%;        /* #FCD34D */
+    --clinical-warning-border: 23 82% 31%;    /* #92400E */
+
+    --clinical-error-bg: 0 75% 15%;           /* #450A0A */
+    --clinical-error-fg: 0 94% 82%;           /* #FCA5A5 */
+    --clinical-error-border: 0 70% 35%;       /* #991B1B */
+
+    --clinical-info-bg: 204 80% 16%;          /* #082F49 */
+    --clinical-info-fg: 201 94% 86%;          /* #BAE6FD */
+    --clinical-info-border: 201 90% 27%;      /* #075985 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Accessible Focus Rings (WCAG 2.2 SC 2.4.11 & SC 2.4.13) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Clinical Tabular Numbers & Vernacular Font Rules
+   ----------------------------------------------------------------------------- */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Vernacular Indian Script Matra Protection */
+[lang="hi"], [lang="mr"] {
+  font-family: var(--font-devanagari), var(--font-sans), sans-serif;
+  line-height: 1.65;
+}
+
+[lang="hi"] h1, [lang="hi"] h2, [lang="hi"] h3 {
+  line-height: 1.35;
+}
+
+/* -----------------------------------------------------------------------------
+   Accessibility: Reduced Motion Preference (WCAG 2.2 SC 2.3.3)
+   ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

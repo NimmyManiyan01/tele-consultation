@@ -1,0 +1,44 @@
+{
+  "name": "@kaizentrix/design-system",
+  "version": "1.0.0",
+  "description": "Enterprise Design System for Kaizentrix Teleconsultation Platform - Next.js 15, Tailwind CSS, Shadcn UI, Radix Primitives, WCAG 2.2 AA",
+  "private": true,
+  "main": "globals.css",
+  "scripts": {
+    "lint:tokens": "node scripts/validate-tokens.js",
+    "test:a11y": "playwright test tests/a11y.spec.ts",
+    "build:tokens": "style-dictionary build"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "lucide-react": "^0.450.0",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-tabs": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-avatar": "^1.1.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4",
+    "cmdk": "^1.0.0",
+    "react-day-picker": "^8.10.1",
+    "date-fns": "^3.6.0",
+    "next-themes": "^0.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "^1.48.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "stylelint": "^16.10.0",
+    "stylelint-declaration-strict-value": "^1.10.6",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,69 @@
+# ==============================================================================
+# Kaizentrix Global Solutions (KGS) — Enterprise Platform .gitignore
+# ==============================================================================
+
+# Database Files & SQLite Runtime Binaries (MANDATORY EXCLUSION)
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+backend/kaizentrix.db
+kaizentrix.db
+
+# Secrets, Environment Files & Keys (MANDATORY EXCLUSION)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Node.js & Next.js Caches & Builds
+node_modules/
+.next/
+out/
+build/
+dist/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python Runtime & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+
+# Testing, Coverage & Playwright Artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+test-results/
+playwright-report/
+blob-report/
+
+# Operating System & IDE Clutter
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary Lock Files & Scratch Workspace
+~$*
+.~lock*
+*.tmp
+*.log
+*.bak
+scratch/
+
+
